@@ -45,33 +45,33 @@ function connect(ip, port, roomId) {
     console.error("WebSocket 错误: ", err);
   };
 }
-function showError(_0x5a04bd) {
-  const _0x4f440d = document.getElementById("errorBox");
-  _0x4f440d.textContent = _0x5a04bd;
-  _0x4f440d.classList.remove("hidden");
+function showError(errorMessage) {
+  const errorBox = document.getElementById("errorBox");
+  errorBox.textContent = errorMessage;
+  errorBox.classList.remove("hidden");
   setTimeout(() => {
-    _0x4f440d.classList.add("hidden");
+    errorBox.classList.add("hidden");
   }, 5000);
 }
 function clearPage() {
   document.body.innerHTML = "";
 }
 function loadRadar() {
-  const _0x4997c6 = document.createElement("script");
-  _0x4997c6.src = "js/radar.js";
-  document.body.appendChild(_0x4997c6);
+  const scriptElement = document.createElement("script");
+  scriptElement.src = "js/radar.js";
+  document.body.appendChild(scriptElement);
 }
-function saveConnectionInfo(_0x576d10, _0x49523c) {
+function saveConnectionInfo(ipAddress, portNumber) {
   localStorage.setItem("connectionInfo", JSON.stringify({
-    "ip": _0x576d10,
-    "port": _0x49523c
+    "ip": ipAddress,
+    "port": portNumber
   }));
 }
 function loadConnectionInfo() {
-  const _0x479baa = JSON.parse(localStorage.getItem("connectionInfo"));
-  _0x479baa && (document.getElementById("ip").value = _0x479baa.ip || "", document.getElementById("port").value = _0x479baa.port || "");
+  const connectionInfo = JSON.parse(localStorage.getItem("connectionInfo"));
+  connectionInfo && (document.getElementById("ip").value = connectionInfo.ip || "", document.getElementById("port").value = connectionInfo.port || "");
 }
 window.onload = function () {
-  const _0x2fc606 = getQueryParams();
-  _0x2fc606.ip && _0x2fc606.port && _0x2fc606.roomId ? (document.getElementById("ip").value = _0x2fc606.ip, document.getElementById("port").value = _0x2fc606.port, document.getElementById("roomid").value = _0x2fc606.roomId) : loadConnectionInfo();
+  const queryParams = getQueryParams();
+  queryParams.ip && queryParams.port && queryParams.roomId ? (document.getElementById("ip").value = queryParams.ip, document.getElementById("port").value = queryParams.port, document.getElementById("roomid").value = queryParams.roomId) : loadConnectionInfo();
 };
